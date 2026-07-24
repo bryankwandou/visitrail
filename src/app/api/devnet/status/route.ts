@@ -1,0 +1,3 @@
+﻿import { NextResponse } from "next/server";
+export const dynamic="force-dynamic";
+export async function GET(){ const started=Date.now(); try{ const response=await fetch(process.env.SOLANA_RPC_URL??"https://api.devnet.solana.com",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getHealth"}),cache:"no-store"}); const payload=await response.json(); return NextResponse.json({cluster:"devnet",healthy:payload.result==="ok",latencyMs:Date.now()-started,checkedAt:new Date().toISOString()}); }catch{return NextResponse.json({cluster:"devnet",healthy:false,latencyMs:Date.now()-started,checkedAt:new Date().toISOString()},{status:503});} }

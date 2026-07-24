@@ -1,65 +1,26 @@
-import Image from "next/image";
-
+import Link from "next/link";
+import { Logo } from "@/components/logo";
+import { LandingMotion } from "@/components/landing-motion";
+const steps = [
+  ["01", "Capture", "Device GPS and timestamps create a real visit trail."],
+  ["02", "Verify", "Deterministic rules check location, duration, and evidence source."],
+  ["03", "Review", "Exceptions require a named reviewer and documented reason."],
+  ["04", "Share", "Families see only finalized, evidence-backed updates."],
+];
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  return <main className="site-shell"><LandingMotion/><nav className="topnav"><Logo /><div className="nav-links"><a href="#system">System</a><a href="#workflow">Workflow</a><a href="#controls">Controls</a><Link href="/agent">AI agent</Link><Link href="/proofs">Devnet proof</Link></div><Link className="button dark" href="/app">Open live workspace <span>↗</span></Link></nav>
+    <section className="hero"><div className="hero-copy"><p className="kicker"><span /> Evidence-first home care operations</p><h1>Every visit leaves<br/><em>a trustworthy trail.</em></h1><p className="hero-lede">VisitRail gives home care teams one operational layer for visit proof, care-note review, staffing continuity, and family confidence.</p><div className="hero-actions"><Link className="button primary big" href="/app">Run the workflow</Link><a className="button ghost big" href="#workflow">See how it works</a></div><div className="trust-row"><span><b>150m</b> GPS verification radius</span><span><b>0</b> unsupported tasks completed</span><span><b>100%</b> review traceability</span></div></div>
+      <div className="hero-visual" aria-label="Visit verification product preview"><div className="orb orb-one"/><div className="orb orb-two"/><div className="proof-card"><div className="proof-head"><Logo compact/><span>Live visit proof</span><i>Verified</i></div><div className="map-grid"><span className="street s1"/><span className="street s2"/><span className="street s3"/><span className="radius"><b><span/></b></span><div className="map-label"><strong>Evelyn&apos;s home</strong><small>24m from check-in</small></div></div><div className="proof-details"><div><span>Check-in</span><strong>9:02 AM</strong></div><div><span>Duration</span><strong>86 min</strong></div><div><span>Source</span><strong>Device GPS</strong></div></div></div><div className="float-card note-float"><span>Care note</span><strong>3 tasks supported</strong><small>1 task left unconfirmed</small></div><div className="float-card chain-float"><span className="chain-dot"/> Devnet proof available</div></div>
+    </section>
+    <section className="problem-strip"><p>Most systems record what staff type.</p><strong>VisitRail verifies what actually happened.</strong><div className="rule"/></section>
+    <section className="system-section" id="system"><div className="section-intro"><p className="eyebrow">Built for the hard parts</p><h2>Operational controls, not another dashboard.</h2><p>Each module closes a failure mode that costs agencies time, trust, or reimbursement.</p></div><div className="feature-grid">
+      <article className="feature featured"><span className="feature-num">01</span><div className="mini-radar"><i/><b/><em/></div><h3>EVV that blocks bad billing</h3><p>Location, timestamp, duration, and evidence source are checked server-side before a visit becomes billable.</p><ul><li>GPS radius validation</li><li>Manual-entry rejection</li><li>Documented exception review</li></ul></article>
+      <article className="feature"><span className="feature-num">02</span><div className="note-lines"><i/><i/><i/></div><h3>Notes grounded in facts</h3><p>Drafts can organize caregiver observations but cannot invent completed tasks or skip human sign-off.</p></article>
+      <article className="feature"><span className="feature-num">03</span><div className="match-viz"><span>MT</span><span>EC</span><i>96</i></div><h3>Continuity-aware matching</h3><p>Rank caregivers by required skills, language, schedule overlap, distance, and relationship continuity.</p></article>
+      <article className="feature dark-feature"><span className="feature-num">04</span><div className="family-mini"><i/><span><b>Visit complete</b><small>Finalized update</small></span></div><h3>A calmer family portal</h3><p>Families get concise finalized updates without internal drafts, flags, or cross-client exposure.</p></article>
+    </div></section>
+    <section className="workflow-section" id="workflow"><div className="section-intro inverse"><p className="eyebrow">One connected workflow</p><h2>From arrival to family update, every state is explicit.</h2></div><div className="workflow-line">{steps.map(([number,title,copy])=><article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div><Link className="button light big" href="/app">Test every state</Link></section>
+    <section className="controls-section" id="controls"><div><p className="eyebrow">Designed around trust boundaries</p><h2>AI helps write.<br/>It never decides.</h2></div><div className="control-list"><article><span>Deterministic</span><h3>Billing authorization</h3><p>Only server-side EVV rules and documented authorized review can open the billing gate.</p></article><article><span>Human controlled</span><h3>Clinical and care record sign-off</h3><p>Drafted notes stay private until a caregiver or coordinator confirms the record.</p></article><article><span>Optional proof</span><h3>Solana evidence anchor</h3><p>A hash can be anchored on devnet without exposing personal or health information.</p></article></div></section>
+    <footer><Logo/><p>Care delivery you can prove.</p><Link href="/app">Open product workspace →</Link></footer>
+  </main>;
 }

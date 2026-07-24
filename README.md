@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# VisitRail
 
-## Getting Started
+VisitRail is an evidence-first operating layer for home care agencies. It verifies visit evidence, keeps AI drafting grounded, makes staffing recommendations explainable, and exposes only finalized updates to families.
 
-First, run the development server:
+## Live product surfaces
+
+- `/` - product landing page with GSAP motion
+- `/app` - interactive command center and EVV simulations
+- `/agent` - live Groq tool-routing agent
+- `/proofs` - browser wallet and real Solana devnet proof lab
+- `/visits` - visit operations and evidence-state board
+- `/notes` - grounded note review queue
+- `/matching` - continuity-aware caregiver ranking
+- `/reviews` - coordinator exception review queue
+- `/family` - finalized-only family experience
+
+## API contracts
+
+- `POST /api/agent/run` - Groq plan selection followed by deterministic tool execution
+- `POST /api/evv/check-in` - device GPS proximity validation
+- `POST /api/evv/check-out` - deterministic visit billability decision
+- `POST /api/care-notes/draft` - evidence-grounded, review-required care note
+- `POST /api/matching` - explainable caregiver ranking
+- `POST /api/proofs/prepare` - canonical SHA-256 evidence digest
+- `POST /api/proofs/anchor` - real Solana devnet Memo transaction
+- `GET /api/devnet/status` - live Solana devnet RPC health
+
+## Run locally
 
 ```bash
+npm install
+copy .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Required live credentials:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `GROQ_API_KEY`
+- `SOLANA_PRIVATE_KEY` for the funded server demo signer
+- `SOLANA_RPC_URL=https://api.devnet.solana.com`
+- `NEXT_PUBLIC_SOLANA_RPC_URL=https://api.devnet.solana.com`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Validate
 
-## Learn More
+```bash
+npm run lint
+npm run type-check
+npm test
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+The current acceptance suite covers valid and rejected EVV evidence, privileged exception review, grounded note drafting, explainable matching, stable privacy-safe hashes, and AI tool authority boundaries.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Database
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Apply `supabase/migrations/202607240001_visitrail_foundation.sql` to Supabase. It provides PostGIS-backed evidence, tenant-aware RLS, finalized-only family note access, immutable audit events, and a server-side billing transition guard.
 
-## Deploy on Vercel
+## Security boundaries
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- AI selects and explains tools but cannot authorize billing.
+- Manual duration entry cannot satisfy EVV.
+- Flagged visits require Coordinator/Admin review.
+- Unconfirmed tasks never appear as completed.
+- Browser wallet signing is explicit; private keys never reach VisitRail.
+- On-chain Memo proofs contain hashes only, never names, addresses, notes, or health data.

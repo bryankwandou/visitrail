@@ -1,0 +1,10 @@
+﻿export type Coordinates = { latitude: number; longitude: number; accuracyMeters?: number };
+export type VisitStatus = "scheduled" | "in_progress" | "verified" | "flagged_unverified" | "reviewed_billable" | "reviewed_non_billable";
+export type ScheduledVisit = { id: string; clientName: string; caregiverName: string; address: string; scheduledStart: string; scheduledEnd: string; serviceMinutes: number; location: Coordinates; tasks: string[] };
+export type VisitEvidence = { visitId: string; checkInAt?: string; checkOutAt?: string; checkInLocation?: Coordinates; checkOutLocation?: Coordinates; source: "device_gps" | "manual"; reviewReason?: string };
+export type EvvDecision = { status: VisitStatus; billable: boolean; distanceMeters: number | null; durationMinutes: number | null; reasons: string[] };
+export type TaskObservation = { task: string; completed: boolean; observation?: string };
+export type CareNoteDraft = { summary: string; completedTasks: string[]; unconfirmedTasks: string[]; observations: string[]; requiresReview: true };
+export type Caregiver = { id: string; name: string; skills: string[]; languages: string[]; availability: string[]; distanceMiles: number; continuityScore: number };
+export type ClientNeeds = { skills: string[]; languages: string[]; preferredSlots: string[] };
+export type MatchResult = Caregiver & { score: number; reasons: string[] };

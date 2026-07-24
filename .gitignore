@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local runtime smoke artifacts
+smoke.*.log
+smoke.pid
+
+
+# Local validation artifacts
+runtime.*.log
+runtime.pid
+final-runtime.*.log
+final-runtime.pid
+agent-response.tmp
+
