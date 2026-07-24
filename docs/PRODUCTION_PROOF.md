@@ -39,3 +39,13 @@ Verified on Friday, July 24, 2026 against `https://visitrail.vercel.app`:
 - The Groq agent selected `prepare_proof` and preserved `wallet_signature_required` authority.
 - Solana devnet transaction `5ZKpNnZwjXk9YTqeB1sF3sU6yHNjyAToM4cJL5M8dErAWrgxVbJKiPjhkU4Zc3eKuzxtD3m8arCGhJgw6cX2zqs4` was confirmed from the rotated production signer.
 - Production visual audit showed the proof lab, wallet verification states, and live RPC latency without a pre-hydration blank state.
+
+## Funded signer authorization hardening
+
+On Friday, July 24, 2026, the funded devnet signer was locked behind a verified wallet session. Runtime acceptance confirmed:
+
+- Anchor request without a wallet session returned HTTP 401.
+- A valid Ed25519 ownership proof returned a 15-minute HMAC wallet session.
+- The valid session authorized devnet transaction `2hxNvA88LLzR92AazZ7HhpbY3gsi9UAJcFdnmifjHmmSqGy8ye6oXiY4aPz45wPXYdd3oth1nwLKzCFLFkpDsZpm`.
+- The anchor response recorded the verified requesting wallet.
+- A modified session token returned HTTP 401.

@@ -60,3 +60,7 @@ agent-response.tmp
 iteration2.*.log
 iteration2.pid
 
+
+session-hardening.*.log
+session-hardening.pid
+

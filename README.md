@@ -68,3 +68,4 @@ Apply `supabase/migrations/202607240001_visitrail_foundation.sql` to Supabase. I
 - Browser wallet signing is explicit; private keys never reach VisitRail.
 - Connected wallets must prove ownership with an expiring signed challenge before transaction signing is enabled.
 - On-chain Memo proofs contain hashes only, never names, addresses, notes, or health data.
+- The funded demo signer rejects anonymous calls and requires a short-lived verified wallet session.
