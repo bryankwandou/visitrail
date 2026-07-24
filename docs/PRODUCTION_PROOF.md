@@ -28,3 +28,14 @@ The `/proofs` route detects Phantom or Solflare, requests explicit connection, p
 
 On Friday, July 24, 2026, VisitRail added an HMAC-protected five-minute challenge and Ed25519 signature verification. Automated acceptance produced HTTP 200 for a valid signature and HTTP 401 after message tampering. Connected-wallet proof signing stays disabled until ownership verification succeeds.
 
+
+## Iteration 2 production acceptance
+
+Verified on Friday, July 24, 2026 against `https://visitrail.vercel.app`:
+
+- Wallet challenge creation returned HTTP 200.
+- A real Ed25519 wallet signature returned HTTP 200 and `verified: true`.
+- The same signature with a modified message returned HTTP 401.
+- The Groq agent selected `prepare_proof` and preserved `wallet_signature_required` authority.
+- Solana devnet transaction `5ZKpNnZwjXk9YTqeB1sF3sU6yHNjyAToM4cJL5M8dErAWrgxVbJKiPjhkU4Zc3eKuzxtD3m8arCGhJgw6cX2zqs4` was confirmed from the rotated production signer.
+- Production visual audit showed the proof lab, wallet verification states, and live RPC latency without a pre-hydration blank state.
