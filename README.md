@@ -1,4 +1,6 @@
-﻿# VisitRail
+# VisitRail
+
+**Live production:** https://visitrail.vercel.app
 
 VisitRail is an evidence-first operating layer for home care agencies. It verifies visit evidence, keeps AI drafting grounded, makes staffing recommendations explainable, and exposes only finalized updates to families.
 
