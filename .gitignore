@@ -52,3 +52,4 @@ final-runtime.*.log
 final-runtime.pid
 agent-response.tmp
 
+.vercel
