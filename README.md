@@ -25,6 +25,8 @@ VisitRail is an evidence-first operating layer for home care agencies. It verifi
 - `POST /api/matching` - explainable caregiver ranking
 - `POST /api/proofs/prepare` - canonical SHA-256 evidence digest
 - `POST /api/proofs/anchor` - real Solana devnet Memo transaction
+- `POST /api/wallet/challenge` - expiring HMAC-protected ownership challenge
+- `POST /api/wallet/verify` - Ed25519 wallet signature verification
 - `GET /api/devnet/status` - live Solana devnet RPC health
 
 ## Run locally
@@ -64,4 +66,5 @@ Apply `supabase/migrations/202607240001_visitrail_foundation.sql` to Supabase. I
 - Flagged visits require Coordinator/Admin review.
 - Unconfirmed tasks never appear as completed.
 - Browser wallet signing is explicit; private keys never reach VisitRail.
+- Connected wallets must prove ownership with an expiring signed challenge before transaction signing is enabled.
 - On-chain Memo proofs contain hashes only, never names, addresses, notes, or health data.

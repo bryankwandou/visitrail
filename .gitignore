@@ -53,3 +53,10 @@ final-runtime.pid
 agent-response.tmp
 
 .vercel
+
+.audit-shots/
+
+
+iteration2.*.log
+iteration2.pid
+

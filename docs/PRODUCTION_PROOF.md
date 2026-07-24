@@ -23,3 +23,8 @@ The on-chain Memo contains only a VisitRail version prefix and SHA-256 hash. It 
 ## Browser wallet
 
 The `/proofs` route detects Phantom or Solflare, requests explicit connection, prepares the transaction client-side, asks the wallet to sign, confirms the signature against devnet, and provides an Explorer link. VisitRail never receives the browser wallet private key.
+
+## Wallet ownership hardening
+
+On Friday, July 24, 2026, VisitRail added an HMAC-protected five-minute challenge and Ed25519 signature verification. Automated acceptance produced HTTP 200 for a valid signature and HTTP 401 after message tampering. Connected-wallet proof signing stays disabled until ownership verification succeeds.
+

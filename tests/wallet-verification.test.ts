@@ -1,0 +1,9 @@
+﻿import test from "node:test";
+import assert from "node:assert/strict";
+import bs58 from "bs58";
+import nacl from "tweetnacl";
+import { Keypair } from "@solana/web3.js";
+import { createWalletChallenge, verifyWalletChallenge } from "../src/lib/wallet-verification.ts";
+const secret="a".repeat(64);const now=Date.parse("2026-07-24T12:00:00Z");
+test("wallet ownership challenge verifies a real Ed25519 signature",()=>{const wallet=Keypair.generate();const created=createWalletChallenge(wallet.publicKey.toBase58(),secret,"visitrail.test",now);const signature=bs58.encode(nacl.sign.detached(new TextEncoder().encode(created.message),wallet.secretKey));const result=verifyWalletChallenge({publicKey:wallet.publicKey.toBase58(),message:created.message,challenge:created.challenge,signature},secret,now+1000);assert.equal(result.verified,true)});
+test("wallet verification rejects tampering and expiration",()=>{const wallet=Keypair.generate();const created=createWalletChallenge(wallet.publicKey.toBase58(),secret,"visitrail.test",now);const signature=bs58.encode(nacl.sign.detached(new TextEncoder().encode(created.message),wallet.secretKey));assert.equal(verifyWalletChallenge({publicKey:wallet.publicKey.toBase58(),message:created.message+" changed",challenge:created.challenge,signature},secret,now+1000).verified,false);assert.equal(verifyWalletChallenge({publicKey:wallet.publicKey.toBase58(),message:created.message,challenge:created.challenge,signature},secret,now+6*60_000).verified,false)});
